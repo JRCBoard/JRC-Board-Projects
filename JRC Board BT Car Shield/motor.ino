@@ -13,5 +13,5 @@ void motor(int a, int b) {
     b = -b;
     digitalWrite(rmf, 0); digitalWrite(rmb, 1);
   }
-  ledcWrite(1, a); ledcWrite(0, b);
+  ledcWrite(0, a); ledcWrite(1, b);
 }

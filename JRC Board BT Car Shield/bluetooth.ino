@@ -15,16 +15,15 @@ void bluetooth() {
       else if (x == 'B') motor(-s * spdl, -s * spdr);
       else if (x == 'L') motor(-s * spdl, s * spdr);
       else if (x == 'R') motor(s * spdl, -s * spdr);
-      else if (x == 'I') motor(0, s * spdr);
-      else if (x == 'G') motor(s * spdl, 0);
-      else if (x == 'H') motor(0, -s * spdr);
-      else if (x == 'J') motor(-s * spdl, 0);
+      else if (x == 'G') motor(0, s * spdr);
+      else if (x == 'I') motor(s * spdl, 0);
+      else if (x == 'J') motor(0, -s * spdr);
+      else if (x == 'H') motor(-s * spdl, 0);
       else if (x == 'S') motor(0, 0);
       else if (x == 'W') light(1);
       else if (x == 'w') light(0);
       else if (x >= '0' && x <= '9') s = x - '0';
       else if (x == 'q') s = 10;
-      else if (x == 'D') break;
     }
   }
   digitalWrite(led1, 0);
