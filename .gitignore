@@ -1,0 +1,4 @@
+
+*.cfg
+Smart_Green_House/debug_custom.json
+Smart_Green_House/esp32.svd
