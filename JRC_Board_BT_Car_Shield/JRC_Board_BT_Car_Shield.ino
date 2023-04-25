@@ -5,15 +5,15 @@ BluetoothSerial SerialBT;
 #define lmb 16
 #define lms 15
 #define rms 2
-#define rmf 17
-#define rmb 4
+#define rmf 4
+#define rmb 17
 #define sw 19
 #define led1 14
 #define led2 32
 
 void setup() {
   Serial.begin(9600);
-  SerialBT.begin("BRC");
+  SerialBT.begin("BRC1 ");
   ledcSetup(0, 1000, 8);
   ledcSetup(1, 1000, 8);
   ledcAttachPin(lms, 0);
