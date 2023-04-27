@@ -13,7 +13,7 @@ BluetoothSerial SerialBT;
 
 void setup() {
   Serial.begin(9600);
-  SerialBT.begin("BRC1 ");
+  SerialBT.begin("JRC Car 2");
   ledcSetup(0, 1000, 8);
   ledcSetup(1, 1000, 8);
   ledcAttachPin(lms, 0);
