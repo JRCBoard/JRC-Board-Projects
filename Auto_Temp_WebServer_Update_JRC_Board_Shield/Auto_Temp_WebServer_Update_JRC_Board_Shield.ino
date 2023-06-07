@@ -13,8 +13,10 @@ const int button = 26, led = 13;
 bool state = 0;
 
 
-const char* ssid = "NAF Tech_WiFi";
-const char* password = "N@f Tech";
+// const char* ssid = "NAF Tech_WiFi";
+// const char* password = "N@f Tech";
+const char* ssid = "JRC Board";
+const char* password = "robotics";
 
 const char index_html[] PROGMEM = R"rawliteral(
   <html> 
