@@ -1,22 +1,22 @@
-int Lvl = 34;//Define the Analog pin# on the Arduino for the level sensor signal
-int RelayPin = 33;
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <BlynkSimpleEsp32.h>
 
-void setup() {
-Serial.begin(115200); // Start the serial communication
-pinMode(RelayPin, OUTPUT); // Set RelayPin as an output pin
+char auth[] = "YourAuthToken";
+char ssid[] = "YourNetworkName";
+char pass[] = "YourPassword";
+
+void setup()
+{
+  Serial.begin(9600);
+  Blynk.begin(auth, ssid, pass);
 }
 
-void loop() {
-int water_lvl=analogRead(Lvl);
-Serial.print("Water level: ");
-Serial.println(water_lvl);
-if(water_lvl<=1800)
+void loop()
 {
-  digitalWrite(RelayPin, HIGH);
-}
-else
-{
-digitalWrite(RelayPin, LOW);
-}
-delay(1000);
+  Blynk.run();
+  if(digitalRead(switch) == HIGH) {
+    Serial.println("Send Notification to Blynk");
+    Blynk.notify("Switch Pressed"); // This notification will be sent to Blynk App
+  }
 }
