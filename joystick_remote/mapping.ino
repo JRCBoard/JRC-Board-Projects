@@ -28,13 +28,13 @@ byte side() {
   joystick[1] = analogRead(joystick_pin[1]);
   if (joystick[1] < joy_mid[1] + error && joystick[1] > joy_mid[1] - error) return 1;
   else if (joystick[1] <= joy_mid[1] - error) {
-    a = 2;
+    a = 0;
     b = mapping(joystick[1], joy_min[1], joy_mid[1] - error, 0, 10);
     b = 10 - b;
     return b * 10 + a;
   }
   else if (joystick[1] >= joy_mid[1] + error) {
-    a = 0;
+    a = 2;
     b = mapping(joystick[1], joy_mid[1] + error, joy_max[1], 0, 10);
     return b * 10 + a;
   }

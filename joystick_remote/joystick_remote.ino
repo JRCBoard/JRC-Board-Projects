@@ -1,28 +1,36 @@
 #include "BluetoothSerial.h"
+#include <EEPROM.h>
 BluetoothSerial SerialBT;
 uint32_t m1, m2;
-int joystick_pin[] = {35, 33};
+int joystick_pin[] = { 35, 33 };
 int joystick[2];
-int joy_min[2] = {4096, 4096};
-int joy_max[2] = {0, 0};
+int joy_min[2] = { 4096, 4096 };
+int joy_max[2] = { 0, 0 };
 int joy_mid[2];
 byte stat[2];
 int error = 200;
 long int fsp, ssp;
 int dir, t_dir;
 void setup() {
+  EEPROM.begin(255);
   pinMode(13, OUTPUT);
   pinMode(14, INPUT_PULLUP);
   pinMode(2, INPUT_PULLUP);
-  cal();
+  for (byte i = 0; i < 2; i++) {
+    joy_mid[i] = EEPROM.read(i) * 16;
+    joy_max[i] = EEPROM.read(i+2) * 16;
+    joy_min[i] = EEPROM.read(i+4) * 16;
+  }
+  if (!digitalRead(14) || !digitalRead(2)) cal();
   Serial.begin(9600);
   SerialBT.begin("joystick remote", true);
-  bool connected = SerialBT.connect("Bluetooth RC Car");
+  bool connected = SerialBT.connect("JRC Board BT Car");
   if (connected) digitalWrite(13, 1);
 }
 
 void loop() {
-  stat[0] = front(); stat[1] = side();
+  stat[0] = front();
+  stat[1] = side();
   Serial.println(String(stat[0]) + " " + String(stat[1]) + " " + String(dir) + " " + String(fsp) + " " + String(ssp));
   dir = (stat[0] % 10) * 10 + (stat[1] % 10);
 
@@ -61,5 +69,9 @@ void loop() {
       else if (t_dir == 00) SerialBT.write('J');
     }
   }
+
+  if(!digitalRead(14)) SerialBT.write('W');
+  if(!digitalRead(2)) SerialBT.write('w');
+
   delay(20);
 }
